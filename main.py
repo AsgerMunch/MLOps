@@ -15,9 +15,7 @@ from model import MyAwesomeModel
 
 def load_checkpoint(filepath):
     checkpoint = torch.load(filepath)
-    model = fc_model.Network(checkpoint['input_size'],
-                             checkpoint['output_size'],
-                             checkpoint['hidden_layers'])
+    model = MyAwesomeModel()
     model.load_state_dict(checkpoint['state_dict'])
     
     return model
@@ -57,17 +55,22 @@ class TrainOREvaluate(object):
         
         # Train the network
         train_loss = []
-        epochs = 5
+        epochs = 20
         for e in range(epochs):
+            print("Epoch {}".format(e+1))
             running_loss = 0
+            count = 0
             for images, labels in trainloader:
+                count+=1
                 # Flatten images
-                images = images.view(images.shape[0],-1)
+                #images = images.view(images.shape[0],-1)
+                #print("Training number: {}".format(count))
+                #print("Input shape: {}".format(images.shape))
 
                 # Training pass
-                optimizer.zero_grad()
                 output = model(images)
                 loss = criterion(output,labels)
+                optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
 
@@ -76,12 +79,16 @@ class TrainOREvaluate(object):
             else:
                 train_loss.append(running_loss/len(trainloader))
         
+        
+        checkpoint = {'state_dict': model.state_dict()}
+        torch.save(checkpoint, 'checkpoint.pth')
+        
         plt.plot(np.arange(epochs)+1,train_loss)
         
     def evaluate(self):
         print("Evaluating until hitting the ceiling")
         parser = argparse.ArgumentParser(description='Training arguments')
-        parser.add_argument('--load_model_from', default="")
+        parser.add_argument('--load_model_from', default="checkpoint.pth")
         # add any additional argument that you want
         args = parser.parse_args(sys.argv[2:])
         print(args)
@@ -92,33 +99,10 @@ class TrainOREvaluate(object):
         optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
         trainloader, _ = mnist()
         
-        # Train the network
-        train_loss = []
-        epochs = 20
-        for e in range(epochs):
-            model.train()
-            running_loss = 0
-            for images, labels in trainloader:
-                # Flatten images
-                images = images.view(images.shape[0],-1)
-
-                # Training pass
-                
-                output = model(images)
-                loss = criterion(output,labels)
-                optimizer.zero_grad()
-                loss.backward()
-                optimizer.step()
-
-                # Update total loss
-                running_loss += loss.item()
-            else:
-                train_loss.append(running_loss/len(trainloader))
-        plt.plot(np.arange(epochs)+1,train_loss)
         
         # TODO: Implement evaluation logic here
-        #if args.load_model_from:
-        #    model = load_checkpoint(args.load_model_from)
+        if args.load_model_from:
+            model = load_checkpoint(args.load_model_from)
         _, testloader = mnist()
         
         ## Compute test accuracy

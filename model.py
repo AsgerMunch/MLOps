@@ -13,8 +13,8 @@ height = 28
 
 # Define CNN parameters
 num_filters_conv1 = 16
-kernel_size_conv1 = 5 # [height, width]
-stride_conv1 = 1*2 # [stride_height, stride_width]
+kernel_size_conv1 = 4 # [height, width]
+stride_conv1 = 1 # [stride_height, stride_width]
 num_l1 = 100
 padding_conv1 = 2
 
@@ -23,7 +23,7 @@ def compute_conv_dim(dim_size):
     return int((dim_size - kernel_size_conv1 + 2 * padding_conv1) / stride_conv1 + 1)
 
 # Define CNN model
-class MyCNNModel(nn.Module):
+class MyAwesomeModel(nn.Module):
     def __init__(self):
         super().__init__()
         self.num_classes = 10
@@ -60,7 +60,7 @@ class MyCNNModel(nn.Module):
         x = self.dropout(relu(self.batchnormInput(self.l_1(x))))
         return F.log_softmax(self.l_out(x), dim=1)
 
-class MyAwesomeModel(nn.Module):
+class MyDenseModel(nn.Module):
     def __init__(self):
         super().__init__()
         # Layers

@@ -15,11 +15,11 @@ def mnist():
     
     # Download and load the train data
     trainset = datasets.MNIST(root = './', download=True, train=True, transform=transform)
-    trainloader = torch.utils.data.DataLoader(trainset, batch_size=64, shuffle=True)
+    trainloader = torch.utils.data.DataLoader(trainset, batch_size=64, shuffle=True,drop_last=True)
     
     # Download and load the test data
     testset = datasets.MNIST(root = './', download=True, train=False, transform=transform)
-    testloader = torch.utils.data.DataLoader(testset, batch_size=64, shuffle=True)
+    testloader = torch.utils.data.DataLoader(testset, batch_size=64, shuffle=True,drop_last=True)
     
     # Download and load the test data
     #testset = datasets.MNIST('~/.pytorch/MNIST_data/', download=True, train=False, transform=transform)
