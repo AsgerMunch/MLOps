@@ -1,0 +1,2 @@
+# External packages to run tests
+pytest
