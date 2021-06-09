@@ -13,8 +13,6 @@ import torch
 
 from src.data.make_dataset import main
 
-#sys.path.insert(1, '/Users/asgermunch/Documents/DTU/MLOps/Day 2/Organised code/src/data')
-
 def test_data():
     
     trainloader, testloader = main()
