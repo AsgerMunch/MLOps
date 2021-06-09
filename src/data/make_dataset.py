@@ -22,20 +22,21 @@ def main():
     logger = logging.getLogger(__name__)
     logger.info('making final data set from raw data')
     
-    #os.system('wget www.di.ens.fr/~lelarge/MNIST.tar.gz')
-    #os.system('tar -zxvf MNIST.tar.gz')
+    os.system('wget www.di.ens.fr/~lelarge/MNIST.tar.gz')
+    os.system('tar -zxvf MNIST.tar.gz')
     
     # Define a transform to normalize the data
     transform = transforms.Compose([transforms.ToTensor(),
                               transforms.Normalize((0.5,), (0.5,)),
                               ])
     
-    #trainset = datasets.MNIST(root = './', download=True, train=True, transform=transform)
-    trainset = datasets.MNIST('/Users/asgermunch/Documents/DTU/MLOps/Day 1', download=False, train=True, transform=transform)
+    trainset = datasets.MNIST(root = './', download=True, train=True, transform=transform)
+    #trainset = datasets.MNIST('/Users/asgermunch/Documents/DTU/MLOps/Day 1', download=False, train=True, transform=transform)
     trainloader = torch.utils.data.DataLoader(trainset, batch_size=64, shuffle=True,drop_last=True)
     
     # Download and load the test data
-    testset = datasets.MNIST(root = '/Users/asgermunch/Documents/DTU/MLOps/Day 1', download=False, train=False, transform=transform)
+    testset = datasets.MNIST(root = './', download=True, train=False, transform=transform)
+    #testset = datasets.MNIST(root = '/Users/asgermunch/Documents/DTU/MLOps/Day 1', download=False, train=False, transform=transform)
     testloader = torch.utils.data.DataLoader(testset, batch_size=64, shuffle=True,drop_last=True)
     return trainloader, testloader
 
