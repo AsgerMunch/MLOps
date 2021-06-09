@@ -26,4 +26,4 @@ jobs:
     - name: Sort out code setup with isort
       run: |
         pip install isort
-        isort test_training.py test_model.py test_data.py
+        isort test_data.py
