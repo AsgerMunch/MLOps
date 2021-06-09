@@ -6,11 +6,14 @@ Created on Wed Jun  9 09:01:39 2021
 @author: asgermunch
 """
 
-import torch
-import numpy as np
 import sys
-#sys.path.insert(1, '/Users/asgermunch/Documents/DTU/MLOps/Day 2/Organised code/src/data')
-from src.data.make_dataset import main
+
+import numpy as np
+import torch
+
+from make_dataset import main
+
+sys.path.insert(1, '/Users/asgermunch/Documents/DTU/MLOps/Day 2/Organised code/src/data')
 
 def test_data():
     
@@ -28,3 +31,4 @@ def test_data():
     assert torch.sum(torch.tensor(np.arange(10))==labels.unique()).item() == 10
     
     print("Test sucessful!")
+
