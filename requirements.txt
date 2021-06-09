@@ -2,5 +2,6 @@
 
 # External packages to run code
 torch
+torchvision
 numpy
 matplotlib
