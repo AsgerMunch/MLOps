@@ -1,3 +1,5 @@
+-e .
+
 # External packages to run code
 torch
 numpy
