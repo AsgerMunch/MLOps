@@ -7,10 +7,10 @@ Created on Wed Jun  9 10:16:33 2021
 """
 
 import sys
-sys.path.insert(1, '/Users/asgermunch/Documents/DTU/MLOps/Day 2/Organised code/src/data')
-from make_dataset import main
-sys.path.insert(1, '/Users/asgermunch/Documents/DTU/MLOps/Day 2/Organised code/src/models')
-from model import MyAwesomeModel
+#sys.path.insert(1, '/Users/asgermunch/Documents/DTU/MLOps/Day 2/Organised code/src/data')
+from src.data.make_dataset import main
+#sys.path.insert(1, '/Users/asgermunch/Documents/DTU/MLOps/Day 2/Organised code/src/models')
+from src.models.model import MyAwesomeModel
 
 def test_model():
     model = MyAwesomeModel()
