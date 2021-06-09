@@ -11,9 +11,9 @@ import sys
 import numpy as np
 import torch
 
-from make_dataset import main
+from src.data.make_dataset import main
 
-sys.path.insert(1, '/Users/asgermunch/Documents/DTU/MLOps/Day 2/Organised code/src/data')
+#sys.path.insert(1, '/Users/asgermunch/Documents/DTU/MLOps/Day 2/Organised code/src/data')
 
 def test_data():
     
